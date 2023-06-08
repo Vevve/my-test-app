@@ -1,32 +1,31 @@
-import { DataQuery } from '@dhis2/app-runtime'
-import i18n from '@dhis2/d2-i18n'
 import React from 'react'
-import classes from './App.module.css'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import styles from './App.module.css'
+import { Navigation } from './navigation/Navigation.js'
+import { Attributes } from './views/Attributes.js'
+import { Form } from './views/Form.js'
+import { Home } from './views/Home.js'
+import { NoMatch } from './views/NoMatch.js'
 
-const query = {
-    me: {
-        resource: 'me',
-    },
-}
+
 
 const MyApp = () => (
-    <div className={classes.container}>
-        <DataQuery query={query}>
-            {({ error, loading, data }) => {
-                if (error) {return <span>ERROR</span>}
-                if (loading) {return <span>...</span>}
-                return (
-                    <>
-                        <h1>
-                            {i18n.t('Hello {{name}}', { name: data.me.name })}
-                        </h1>
-                        <h3>{i18n.t('Welcome to DHIS2!')}</h3>
-                        <h3>{i18n.t('Branch test')}</h3>
-                    </>
-                )
-            }}
-        </DataQuery>
+    <BrowserRouter>
+        <div className={styles.container}>
+            <div className={styles.left}>
+                <Navigation />
+            
+        </div>
+            <div className={styles.right}>
+                <Routes>
+                    <Route exact path='/' Component={Home} />
+                    <Route exact path='/form' Component={Form} />
+                    <Route exact path='/attributes' Component={Attributes} />
+                    <Route Component={NoMatch} />
+                </Routes>
+            </div>
     </div>
+    </BrowserRouter>
 )
 
 export default MyApp
