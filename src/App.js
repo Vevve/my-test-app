@@ -21,6 +21,7 @@ const MyApp = () => (
                             {i18n.t('Hello {{name}}', { name: data.me.name })}
                         </h1>
                         <h3>{i18n.t('Welcome to DHIS2!')}</h3>
+                        <h3>{i18n.t('Branch test')}</h3>
                     </>
                 )
             }}
